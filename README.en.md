@@ -11,6 +11,12 @@ Use **SuperGrok / X Premium** to sign in to xAI from DeepSeek Harness (DSH), cal
 
 > **Unofficial project.** Not affiliated with xAI, SpaceXAI, DeepSeek, or Anysphere. The subscription billing/settings endpoints are undocumented Grok CLI proxy endpoints and may change. Use at your own risk and follow xAI's terms.
 
+## Screenshot
+
+![Grok (xAI Subscription) card in Settings → Models](docs/images/grok-card.webp)
+
+> Plan, weekly usage, live models, context, price, and reasoning efforts.
+
 ## Features
 
 - **Subscription sign-in, no API key**: xAI device-code OAuth; the credential is stored by DSH as `llm-pi-ai/xai`.

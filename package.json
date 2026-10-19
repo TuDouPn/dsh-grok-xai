@@ -40,7 +40,8 @@
     "CONTRIBUTING.md",
     "SECURITY.md",
     "CHANGELOG.md",
-    "docs/*.md"
+    "docs/*.md",
+    "docs/images/*"
   ],
   "dsh": {
     "bundle": {
