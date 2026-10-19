@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Grok（xAI 订阅）",
+    "description": "使用 SuperGrok 或 X Premium 订阅登录 xAI，在 DeepSeek Harness 中直接使用 Grok 模型，无需单独的 API Key。"
+  }
+}
