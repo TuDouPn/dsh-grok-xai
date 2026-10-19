@@ -258,6 +258,8 @@ node --check client.js
 
 插件没有构建步骤、没有 npm 依赖。修改后，把目录重新安装为本地 bundle，或重启 DSH 让 Host 模块重新加载。Client 半在 Web 页面中通过 HMR 更新；如果没生效，刷新页面。
 
+包名使用 `@local/` 前缀是为了把它当作本地 bundle 安装；如果要发布到 npm，请同时修改 `package.json` 的 `name`、`cordis.patch.yml` 中的 `name`，并重新安装 bundle。
+
 ### 调试接口
 
 Host 半注册了以下同源路由。它们只返回状态和统计，不返回令牌：
