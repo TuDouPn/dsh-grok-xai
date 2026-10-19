@@ -5,6 +5,7 @@
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![DeepSeek Harness](https://img.shields.io/badge/DeepSeek%20Harness-plugin-4d6bfe)
 ![status](https://img.shields.io/badge/status-experimental-orange)
+[![check](https://github.com/TuDouPn/dsh-grok-xai/actions/workflows/check.yml/badge.svg)](https://github.com/TuDouPn/dsh-grok-xai/actions/workflows/check.yml)
 
 在 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（DSH）里使用 **SuperGrok / X Premium 订阅**登录 xAI，直接调用 Grok 模型，并查看订阅用量、实时模型、上下文和价格。
 
@@ -54,7 +55,7 @@
 ### 1. 获取代码
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/TuDouPn/dsh-grok-xai.git
 cd dsh-grok-xai
 ```
 

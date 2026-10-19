@@ -5,6 +5,7 @@ English | [简体中文](README.md)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![DeepSeek Harness](https://img.shields.io/badge/DeepSeek%20Harness-plugin-4d6bfe)
 ![status](https://img.shields.io/badge/status-experimental-orange)
+[![check](https://github.com/TuDouPn/dsh-grok-xai/actions/workflows/check.yml/badge.svg)](https://github.com/TuDouPn/dsh-grok-xai/actions/workflows/check.yml)
 
 Use **SuperGrok / X Premium** to sign in to xAI from DeepSeek Harness (DSH), call Grok models, and see subscription usage, live models, context windows, and prices.
 
@@ -30,7 +31,7 @@ Use **SuperGrok / X Premium** to sign in to xAI from DeepSeek Harness (DSH), cal
 ## Install
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/TuDouPn/dsh-grok-xai.git
 cd dsh-grok-xai
 ```
 
