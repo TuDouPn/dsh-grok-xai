@@ -1,0 +1,46 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check Host and Client syntax
+        run: |
+          node --check index.js
+          node --check client.js
+      - name: Validate JSON and manifest
+        run: |
+          node -e "for (const p of ['package.json','locale/en.json','locale/zh.json']) JSON.parse(require('fs').readFileSync(p, 'utf8'))"
+          node -e "const p=require('./package.json'); if (!p.dsh?.bundle?.patch) throw new Error('missing dsh.bundle.patch'); if (!p.dsh?.client) throw new Error('missing dsh.client')"
+      - name: Check relative markdown links
+        run: |
+          node - <<'EOF'
+          const fs = require('fs')
+          const path = require('path')
+          const files = ['README.md', 'README.en.md', 'CONTRIBUTING.md', 'SECURITY.md', 'CHANGELOG.md', 'docs/grok-bot-capabilities.md']
+          const missing = []
+          for (const file of files) {
+            const text = fs.readFileSync(file, 'utf8')
+            for (const match of text.matchAll(/\[[^\]]+\]\(([^)]+)\)/g)) {
+              const link = match[1]
+              if (/^(https?:|#)/.test(link)) continue
+              const target = path.normalize(path.join(path.dirname(file), link))
+              if (!fs.existsSync(target)) missing.push(`${file} -> ${link}`)
+            }
+          }
+          if (missing.length) {
+            console.error(missing.join('\n'))
+            process.exit(1)
+          }
+          EOF
