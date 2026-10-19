@@ -37,8 +37,8 @@ cd dsh-grok-xai
 Install the directory as a local bundle in DSH:
 
 1. Open **Plugins** in the DSH sidebar.
-2. Choose **Install** and enter the **absolute path** to the cloned directory, for example `/Users/you/code/dsh-grok-xai`.
-3. Enable the bundle.
+2. Choose **Install** and enter the **absolute path** to the cloned directory, for example `/Users/you/code/dsh-grok-xai`. If the dialog only accepts a package name or URL, use option B.
+3. Approve the operation if prompted, then enable the bundle.
 
 Or ask the DSH agent:
 

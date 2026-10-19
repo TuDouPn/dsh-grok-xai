@@ -66,8 +66,8 @@ DSH 的 bundle 安装会把该目录链接到当前 profile，并写入 `dsh.pro
 
 1. 打开左侧 **Plugins** 页面。
 2. 选择 **Install**（安装 bundle）。
-3. 填入克隆目录的**绝对路径**，例如 `/Users/you/code/dsh-grok-xai`。
-4. 安装完成后确认 bundle 已启用。
+3. 填入克隆目录的**绝对路径**，例如 `/Users/you/code/dsh-grok-xai`。如果界面只接受包名或 URL，改用方式 B。
+4. 安装过程中可能需要批准；完成后确认 bundle 已启用。
 
 **方式 B：让 DSH Agent 安装**
 
