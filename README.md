@@ -17,6 +17,9 @@
 
 > 截图：套餐、本周订阅用量、实时模型、上下文、价格和推理强度。
 
+> **已经在 DSH 里？** 直接把这句话发给 Agent：
+> `安装这个 DSH 插件并启用：https://github.com/TuDouPn/dsh-grok-xai.git`
+
 ---
 
 ## 目录
@@ -59,27 +62,59 @@
 
 ## 安装
 
-### 1. 获取代码
+有两种方式。**推荐直接在 DSH 里给 Git 地址**，不需要先 clone。
+
+### 方式一：在 DSH 内直接安装（推荐）
+
+复制仓库地址：
+
+```text
+https://github.com/TuDouPn/dsh-grok-xai.git
+```
+
+在 DSH 当前 profile 的会话里，把下面这句话发给 Agent：
+
+```text
+请把这个 Git 仓库作为 DeepSeek Harness 插件安装到当前 profile 并启用：
+https://github.com/TuDouPn/dsh-grok-xai.git
+
+安装前先检查它是不是一个 DSH bundle；安装后确认 bundle 已启用，并告诉我 Grok 卡片在哪里打开。
+```
+
+DSH 会：
+
+1. 读取仓库的 `package.json`，确认包含 `dsh.bundle.patch`；
+2. 通过 `plugin_manager` 的 `install_bundle` 从 Git 安装到当前 profile；
+3. 把 bundle 写入 `dsh.profile.bundles` 并启用；
+4. 在 **Plugins** 页面显示 `@local/dsh-grok-xai`。
+
+安装过程可能需要一次批准（`danger-full-access` 或 approval）。完成后：
+
+1. 打开 **设置 → 模型**；
+2. 滚动到页面底部的 **Grok（xAI 订阅）** 卡片；
+3. 登录 SuperGrok / X Premium。
+
+> 这种方式安装的是 Git 快照。更新时让 DSH 重新安装同一地址，或在 **Plugins** 页面更新；它不会跟随你本地目录的 `git pull`。
+>
+> 如果当前 DSH 版本的安装器不支持 Git 地址，会提示无法解析；改用方式二克隆后安装即可。
+
+### 方式二：克隆后安装本地 bundle
+
+适合要改代码或跟进 `main` 分支的情况。
 
 ```bash
 git clone https://github.com/TuDouPn/dsh-grok-xai.git
 cd dsh-grok-xai
 ```
 
-### 2. 作为本地 bundle 安装到 DSH
-
-DSH 的 bundle 安装会把该目录链接到当前 profile，并写入 `dsh.profile.bundles`。
-
-**方式 A：在 DSH Web 中安装**
+**在 DSH Web 中安装**
 
 1. 打开左侧 **Plugins** 页面。
 2. 选择 **Install**（安装 bundle）。
-3. 填入克隆目录的**绝对路径**，例如 `/Users/you/code/dsh-grok-xai`。如果界面只接受包名或 URL，改用方式 B。
+3. 填入克隆目录的**绝对路径**，例如 `/Users/you/code/dsh-grok-xai`。如果界面只接受包名或 URL，改用下面的 Agent 方式。
 4. 安装过程中可能需要批准；完成后确认 bundle 已启用。
 
-**方式 B：让 DSH Agent 安装**
-
-在当前 profile 的会话里对 Agent 说：
+**让 DSH Agent 安装**
 
 ```text
 把 /绝对路径/dsh-grok-xai 作为本地 bundle 安装到当前 profile，并启用它。
@@ -87,19 +122,28 @@ DSH 的 bundle 安装会把该目录链接到当前 profile，并写入 `dsh.pro
 
 Agent 会调用 `plugin_manager` 的 `install_bundle`，target 指向该目录。
 
-> 安装会修改当前 DSH profile，影响该 profile 的所有会话。插件以链接方式安装，**不要移动或删除克隆目录**，否则 profile 中的依赖会失效。
+> 本地安装是链接方式，**不要移动或删除克隆目录**，否则 profile 中的依赖会失效。安装会修改当前 profile，影响该 profile 的所有会话。
 
-### 3. 打开卡片
+### 打开卡片
 
 进入 **设置 → 模型**，滚动到页面底部的 **Grok（xAI 订阅）** 卡片。
 
+### 验证安装
+
+- **Plugins** 页面能看到 `@local/dsh-grok-xai`，且已启用；
+- **设置 → 模型** 页面底部能看到 **Grok（xAI 订阅）** 卡片；
+- 如果看不到，刷新页面；Host 代码更新后可能需要重启 DSH。
+
 ### 升级
 
-```bash
-git pull
-```
+- **Git URL 安装**：让 DSH 重新安装同一地址，或在 **Plugins** 页面执行更新。
+- **本地 clone 安装**：
 
-然后在 **Plugins** 中重新启用该 bundle，或重启 DSH。Host 代码更新后，仅刷新页面不一定加载新的 Host 模块。
+  ```bash
+  git pull
+  ```
+
+  然后在 **Plugins** 中重新启用该 bundle，或重启 DSH。Host 代码更新后，仅刷新页面不一定加载新的 Host 模块。
 
 ### 卸载
 

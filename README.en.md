@@ -36,34 +36,87 @@ Use **SuperGrok / X Premium** to sign in to xAI from DeepSeek Harness (DSH), cal
 
 ## Install
 
+There are two paths. **The recommended one is to give the Git URL to DSH**; no local clone is needed.
+
+### Option 1: Install directly from DSH (recommended)
+
+Copy the repository URL:
+
+```text
+https://github.com/TuDouPn/dsh-grok-xai.git
+```
+
+In a session on the target DSH profile, send this to the agent:
+
+```text
+Install this Git repository as a DeepSeek Harness plugin in the current profile and enable it:
+https://github.com/TuDouPn/dsh-grok-xai.git
+
+Check that it is a DSH bundle before installing; after installation, confirm the bundle is enabled and tell me where to open the Grok card.
+```
+
+DSH will:
+
+1. Read the repository's `package.json` and confirm it declares `dsh.bundle.patch`;
+2. install it from Git into the current profile through `plugin_manager`'s `install_bundle`;
+3. add the bundle to `dsh.profile.bundles` and enable it;
+4. show `@local/dsh-grok-xai` on the **Plugins** page.
+
+The installation may require one approval (`danger-full-access` or an approval prompt). Then:
+
+1. Open **Settings → Models**;
+2. scroll to the **Grok (xAI Subscription)** card at the bottom;
+3. sign in with SuperGrok / X Premium.
+
+> This installs a Git snapshot. To update, ask DSH to reinstall the same URL or use the **Plugins** page update action. It does not follow a local `git pull`.
+>
+> If your DSH version's installer does not accept Git URLs, it will report that it cannot resolve the spec; use Option 2 (clone and install locally) instead.
+
+### Option 2: Clone and install a local bundle
+
+Use this when you want to modify the code or track `main` locally.
+
 ```bash
 git clone https://github.com/TuDouPn/dsh-grok-xai.git
 cd dsh-grok-xai
 ```
 
-Install the directory as a local bundle in DSH:
+**Install from the DSH Web UI**
 
 1. Open **Plugins** in the DSH sidebar.
-2. Choose **Install** and enter the **absolute path** to the cloned directory, for example `/Users/you/code/dsh-grok-xai`. If the dialog only accepts a package name or URL, use option B.
+2. Choose **Install** and enter the **absolute path** to the cloned directory, for example `/Users/you/code/dsh-grok-xai`. If the dialog only accepts a package name or URL, use the agent option below.
 3. Approve the operation if prompted, then enable the bundle.
 
-Or ask the DSH agent:
+**Ask the DSH agent**
 
 ```text
 Install the local bundle at /absolute/path/dsh-grok-xai into the current profile and enable it.
 ```
 
-The bundle is linked, not copied. Do not move or delete the checkout while it is installed.
+The agent calls `plugin_manager`'s `install_bundle` with the directory as the target.
+
+> A local install is linked, not copied. Do not move or delete the checkout while it is installed. Installation modifies the current profile and affects every session on it.
+
+### Open the card
 
 Open **Settings → Models** and scroll to the **Grok (xAI Subscription)** card at the bottom.
 
+### Verify the installation
+
+- The **Plugins** page shows `@local/dsh-grok-xai` and it is enabled;
+- **Settings → Models** shows the **Grok (xAI Subscription)** card;
+- If not, refresh the page; Host code changes may require a DSH restart.
+
 ### Upgrade
 
-```bash
-git pull
-```
+- **Git URL install**: ask DSH to reinstall the same URL, or use the **Plugins** page update action.
+- **Local clone install**:
 
-Re-enable the bundle in **Plugins**, or restart DSH. Host-side JavaScript changes may need a reload/restart.
+  ```bash
+  git pull
+  ```
+
+  Then re-enable the bundle in **Plugins**, or restart DSH. Host-side JavaScript changes may need a reload/restart.
 
 ### Uninstall
 
